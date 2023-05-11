@@ -917,14 +917,30 @@
                         <span>Ex:- iPhone 14</span>
                     </div>
     
-                    <input type="submit" id="crawl_btn" value="Crawl The Site">
+                    <input onclick="run_loader()" type="submit" id="crawl_btn" value="Crawl The Site">
                 </form>
             </div>
         </div>
     </div>
 
+    <div id="separator"></div>
+
+    <!-- Data RePresent Part -->
+    <section id="Presenter">
+
+    </section>
 
 
+    <!-- Footer section -->
+    <footer>
+        <img src="{{url_for('static', filename='siderman.png')}}" width="320PX" height="320PX">
+        <div>
+            <p>This project is for educational purposes only. The data used in this project has been obtained solely 
+                for the purpose of academic research and study. We do not intend to use this data for any commercial or
+                 illegal purposes. All content displayed on this website belongs to Flipkart and is used under fair use
+                  principles. We do not claim ownership of any of the content displayed on this website.</p>
+        </div>
+    </footer>
 
 
     <script src="{{ url_for('static', filename='js/logic.js') }}"></script>
