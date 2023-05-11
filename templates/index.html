@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critic Crawler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <ul>
+        <li><a class="active" href="/">
+            <img src= "{{url_for('static', filename='logo.png')}}">
+        </a></li>
+        <li id="developer"><img src="{{url_for('static', filename='developer.png')}}", width="130px"></li>
+      </ul>
+
+
+    <script src="{{ url_for('static', filename='js/logic.js') }}"></script>
+</body>
+</html>

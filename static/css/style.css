@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    padding:0;
+    
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding:  0 60px;
+    overflow: hidden;
+    height: 60px;
+    background-color: #535454;
+    overflow: visible;
+    position: relative;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a img{
+    width: 150px;
+    height: 60px;
+    position: absolute;
+    
+  }
+
+  #developer {
+    position: absolute;
+    right: 30px;
+    top: 26px;
+  }
