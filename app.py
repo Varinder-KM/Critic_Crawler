@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 import pandas as pd 
 import numpy as np 
 import requests
@@ -7,6 +8,16 @@ import lxml
 import re
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///Reviews.db"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+class Reviews(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    reviews = db.Column(db.String(1000), nullable=True)
+
+    def __repr__(self) -> str:
+      return f"{self.sno} - {self.reviews}"
 
 # sub_reviews
 def sub_reviews(lnk):
@@ -40,7 +51,7 @@ def get_reviews(lnk):
     navs =  soup1.find('div', attrs={'class':'_2MImiq _1Qnn1K'})
     str_num = navs.find('span').text[10:]
     str_num = str_num.replace(',', '')
-    nums = 10 if int(str_num) > 10 else int(str_num)
+    nums = 5 if int(str_num) > 5 else int(str_num)
     for num in range(2, nums+1):
       hrf = 'https://www.flipkart.com' + lnk+ '&page='+ str(num)
       ls = sub_reviews(hrf)
@@ -89,10 +100,11 @@ def featch_from_flipkart(product, prod_nam):
         dataset = pd.concat([dataset, df], ignore_index=True)
         break
 
-    return dataset
+    return dataset, links_ls[1]['nam'], links_ls[1]['img']
   else:
     return 'Request is Not FullFilds'
     
+global dataset
       
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -103,17 +115,25 @@ def index():
 
         flipkart_url = 'https://www.flipkart.com/search?q='+tr_name
         flipkart_url
-        Dataset = featch_from_flipkart(flipkart_url, prod_name.lower())
-        if Dataset.size:
-            st = str(Dataset.shape)
-            return st
+        try:
+            dataset, name, img = featch_from_flipkart(flipkart_url, prod_name.lower())
+        except:
+            return render_template('Emplty.html', dataset=dataset)
+
+        if dataset.size:
+          return render_template('reviews.html', dataset=dataset, prd_nam=name, prd_img = img)
         else:
-            return 'Request is Not FullFilds'
-        
+            return render_template('Empty.html', dataset=dataset)
+
     return render_template('index.html')
 
 
 
+
+
+@app.route('/reviews', methods=['GET', 'POST'])
+def downlad():
+  return len(dataset.size)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+{% block dataset %}
+    <section id="Presenter">
+        <div id="container">
+
+            <div id="col1">
+                <div id="product">
+                    <div id="prod_img"><img src="{{prd_img}}"></div>
+                    <div id="prod_name"><p>{{prd_nam}}</p></div>
+                </div>
+            </div>
+
+            <div id="col2">
+                <div id="meter">
+                  <p>Sentiment Percentage of Reviews</p>
+                  <div id="sentiment">
+                      <div id="green"><span>Positive</span></div>
+                      <div id="yellow"><span>Nutral</span></div>
+                      <div id="red"><span>Negative</span></div>
+                  </div>
+
+                </div>
+
+                <div id="table-section">
+                    {% if dataset.size == 0 %}
+                    <div class="alert alert-dark" role="alert">
+                        No Todos found. Add your first todo now!
+                      </div>
+                        {% else %} 
+                        <table class="table">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">SNo</th>
+                                <th scope="col">Reviews</th>
+                              </tr>
+                            </thead>
+                            
+                            <tbody>
+                  {% for n in dataset.index[:10] %}
+                  <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>
+                      {% if dataset['Reviews'][n]|length >= 20 %}
+
+                        {{dataset['Reviews'][n][:20] + '......'}}
+                        
+                      {% else %}
+                       {{dataset['Reviews'][n]}}
+                      {% endif %}
+                    </td>
+                  </tr>
+                  
+                  {% endfor %}
+                </tbody>
+                </table>
+                  {% endif %}
+                </div>
+
+                <a href="/reviews" id="dwnl-btn">
+                  <p>Download</p>
+                  <img src="static/downl_icon.png" width="25px" height="25px">
+                </a>
+
+            </div>
+        </div>
+    </section>
+{% endblock dataset %}
