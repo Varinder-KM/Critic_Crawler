@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -911,7 +912,7 @@
                 it provides reviews in structure format . you can download  reviews in csv file.</p>
 
             <div>
-                <form action="/" method="POST" id="input_form">
+                <form action="/reviews" method="POST" id="input_form">
                     <div id="prod_input">
                         <input type="text" name="prod_input" required="required">
                         <span>Ex:- iPhone 14</span>
@@ -944,6 +945,6 @@
     </footer>
 
 
-    <script src="{{ url_for('static', filename='js/logic.js') }}"></script>
+   
 </body>
 </html>

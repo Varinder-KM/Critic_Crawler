@@ -246,12 +246,13 @@ ul {
     width: 480px;
     height: 620px;
     box-shadow: 0 0 2px rgba(7, 7, 7, 0.25);
-    border-radius: 5px ;
+    border-radius: 15px ;
     padding: 30px 30px;
     display: flex;
     justify-content: center;
     overflow: hidden;
     flex-direction: column;
+    box-shadow: 0 0 45px 5px rgb(241, 241, 241);
 }
 
 #container #col1 #prod_img{
@@ -265,9 +266,8 @@ ul {
     margin: 0 auto;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 38px;
+    font-size: 22px;
     font-weight: bold;
-    padding-top: 15px;
     color: rgba(0, 0, 0, 0.81);
 
 }
@@ -278,52 +278,16 @@ ul {
     flex-direction: column;
 }
 
-#sentiment{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 98px;
-    border: 1px solid rgba(0, 0, 0, 0.14);
-    border-radius: 5px;
-    padding: 15px;
-    text-align: center;
-}
-#sentiment #green{
-    width: 40%;
-    background-color: green;
-}
-#sentiment #yellow{
-    width: 40%;
-    background-color: yellow;
-}
-#sentiment #red{
-    width: 20%;
-    background-color: red;
-}
-#sentiment div span{
-    position: relative;
-    top: 50%;
-}
-
-#container #col2 #meter p{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 0;
-}
-
-
 #table-section{
     width: 100%;
-    height: 460px;
-    border: 1px solid rgba(0, 0, 0, 0.14);
+    height: 462px;
     padding: 12px;
     display: flex;
     flex-direction: column;
     left: -50%;
     border-radius: 5px;
     margin-top: 98px;
+    box-shadow: 0 0 45px 5px rgb(241, 241, 241);
 }
 
 #custom-table{
@@ -478,4 +442,171 @@ footer p{
     right: 15%;
     
     
+}
+
+#dataframe{
+    display:none;
+}
+
+/* Santiment Meter */
+
+#meter{
+    padding: 15px;
+    box-shadow: 0 0 45px 5px rgb(241, 241, 241);
+}
+#meter p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 60px;
+}
+
+
+.gauge {
+    width: 100%;
+    max-width: 500px;
+    font-family: "Roboto", sans-serif;
+    font-size: 32px;
+    color: #004033;
+    margin: 15px auto;
+
+  }
+  
+  .gauge__body {
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%;
+    background: #b4c0be;
+    position: relative;
+    border-top-left-radius: 100% 200%;
+    border-top-right-radius: 100% 200%;
+    overflow: hidden;
+  }
+  
+  .green__fill {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: 100%;
+    background: #009578;
+    transform-origin: center top;
+    /* transform: rotate(0.3turn); */
+    transition: transform 0.2s ease-out;
+    z-index: 500;
+  }
+  
+.yellow__fill{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: 100%;
+    background: #e4e003;
+    transform-origin: center top;
+    /* transform: rotate(0.4turn); */
+    z-index: 300;
+    transition: transform 0.4s ease-out;
+}
+
+.red__fill{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: 100%;
+    background: #e64404;
+    transform-origin: center top;
+    /* transform: rotate(0.5turn); */
+    z-index: 200;
+    transition: transform 0.6s ease-out;
+}
+  .gauge__cover {
+    width: 75%;
+    height: 150%;
+    background: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+  }
+  
+.gauge__cover div{
+    position: relative;
+    top: 20%;
+    left: 10%;
+}
+
+#post{
+    display: flex;
+    flex-direction: row;
+}
+#post #g{
+    width: 25px;
+    height: 25px;
+    border: 1px solid black;
+    background: #009578;
+    position: relative;
+    top: 15%;
+}
+#post p{
+    color: black;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+
+#nutrl{
+    display: flex;
+    flex-direction: row;
+}
+#nutrl #y{
+    width: 25px;
+    height: 25px;
+    border: 1px solid black;
+    background: #E4E003;
+    position: relative;
+    top: 15%;
+    margin-left: 10px;
+}
+#nutrl p{
+    color: black;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+
+#negt{
+    display: flex;
+    flex-direction: row;
+}
+#negt #r{
+    width: 25px;
+    height: 25px;
+    border: 1px solid black;
+    background: #E64404;
+    position: relative;
+    top: 15%;
+    margin-left: 10px;
+}
+#negt p{
+    color: black;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+#empty{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#empty img{
+    padding-bottom: 120px;
 }

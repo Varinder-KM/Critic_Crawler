@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, send_file
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd 
 import numpy as np 
@@ -6,18 +6,9 @@ import requests
 from bs4 import BeautifulSoup
 import lxml
 import re
+import random
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///Reviews.db"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-class Reviews(db.Model):
-    sno = db.Column(db.Integer, primary_key=True)
-    reviews = db.Column(db.String(1000), nullable=True)
-
-    def __repr__(self) -> str:
-      return f"{self.sno} - {self.reviews}"
 
 # sub_reviews
 def sub_reviews(lnk):
@@ -103,37 +94,42 @@ def featch_from_flipkart(product, prod_nam):
     return dataset, links_ls[1]['nam'], links_ls[1]['img']
   else:
     return 'Request is Not FullFilds'
-    
-global dataset
-      
+
+
+
+
+# Sentiment Analysis
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        prod_name = request.form['prod_input']
-        tr_name = '+'.join([w.lower() for w in prod_name.split()])
-        tr_name
-
-        flipkart_url = 'https://www.flipkart.com/search?q='+tr_name
-        flipkart_url
-        try:
-            dataset, name, img = featch_from_flipkart(flipkart_url, prod_name.lower())
-        except:
-            return render_template('Emplty.html', dataset=dataset)
-
-        if dataset.size:
-          return render_template('reviews.html', dataset=dataset, prd_nam=name, prd_img = img)
-        else:
-            return render_template('Empty.html', dataset=dataset)
-
     return render_template('index.html')
 
-
-
-
-
 @app.route('/reviews', methods=['GET', 'POST'])
-def downlad():
-  return len(dataset.size)
+def home():
+  dataset = pd.DataFrame(columns=['Sr No', 'Review'])
+  if request.method == 'POST':
+      prod_name = request.form['prod_input']
+      tr_name = '+'.join([w.lower() for w in prod_name.split()])
+      flipkart_url = 'https://www.flipkart.com/search?q='+tr_name
+
+      g = round(random.uniform(0.02, 0.3),2)
+      y = round(random.uniform(g, 0.5),2)
+      r =0.5-y
+      r = y+r
+      clr = [str(g),str(y),str(r)]
+
+      try:
+        dataset, name, img = featch_from_flipkart(flipkart_url, prod_name.lower())
+        if dataset.size:
+          return render_template('reviews.html', df=dataset.to_html(), dataset=dataset, prd_nam=name, prd_img = img, style_values=clr)
+        else:
+          return render_template('Empty.html')
+
+      except:
+          return render_template('Empty.html')
+
+  else :
+    return redirect('/')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
