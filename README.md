@@ -35,8 +35,9 @@
   <li>
     <p>Run the project</p>
     <code>flask run</code>
+  </li>
  </ol>
-
+  <img src='https://github.com/Varinder-KM/Critic_Crawler/blob/master/home_page.png' alt='home_page'>
 
 <h2>How to Use:</h2>
 <ul>
